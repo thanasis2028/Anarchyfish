@@ -4,6 +4,7 @@
 src/.depend
 
 # Built binary
+src/anarchyfish*
 src/stockfish*
 src/-lstdc++.res
 

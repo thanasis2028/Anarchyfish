@@ -2,6 +2,9 @@
 
 [![Build Status](https://github.com/official-stockfish/Stockfish/actions/workflows/stockfish.yml/badge.svg)](https://github.com/official-stockfish/Stockfish/actions)
 
+This fork of Stockfish (nicknamed Anarchyfish) will always capture "En Passant" if
+available to avoid getting bricked!
+
 [Stockfish](https://stockfishchess.org) is a free, powerful UCI chess engine
 derived from Glaurung 2.1. Stockfish is not a complete chess program and requires a
 UCI-compatible graphical user interface (GUI) (e.g. XBoard with PolyGlot, Scid,

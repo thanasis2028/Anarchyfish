@@ -261,14 +261,29 @@ ExtMove* generate<LEGAL>(const Position& pos, ExtMove* moveList) {
   Square ksq = pos.square<KING>(us);
   ExtMove* cur = moveList;
 
+  ExtMove* cur2 = moveList;
+  bool has_enpassant = false;
+
   moveList = pos.checkers() ? generate<EVASIONS    >(pos, moveList)
                             : generate<NON_EVASIONS>(pos, moveList);
   while (cur != moveList)
-      if (  ((pinned && pinned & from_sq(*cur)) || from_sq(*cur) == ksq || type_of(*cur) == EN_PASSANT)
-          && !pos.legal(*cur))
-          *cur = (--moveList)->move;
+    if (  ((pinned && pinned & from_sq(*cur)) || from_sq(*cur) == ksq || type_of(*cur) == EN_PASSANT)
+        && !pos.legal(*cur))
+        *cur = (--moveList)->move;
+    else {
+      if (type_of(*cur) == EN_PASSANT) {
+        has_enpassant = true;
+      }
+      ++cur;
+    }
+
+  if (has_enpassant) {
+    while (cur2 != moveList)
+      if (type_of(*cur2) != EN_PASSANT)
+        *cur2 = (--moveList)->move;
       else
-          ++cur;
+        ++cur2;
+  }
 
   return moveList;
 }
